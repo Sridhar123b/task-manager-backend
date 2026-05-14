@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.taskmanager.backend.model.Task;
 import com.taskmanager.backend.repository.TaskRepository;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {
+    "http://localhost:3000",
+    "https://task-manager-frontend-rust-kappa.vercel.app"
+})
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
