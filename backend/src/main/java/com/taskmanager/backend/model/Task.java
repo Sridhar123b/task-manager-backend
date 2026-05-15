@@ -14,6 +14,7 @@ public class Task {
 
     private String title;
     private String status;
+    private String assignedTo;
 
     public Task() {
     }
@@ -39,5 +40,12 @@ public class Task {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+    public String getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(String status) {
+        this.assignedTo = assignedTo;
     }
 }
