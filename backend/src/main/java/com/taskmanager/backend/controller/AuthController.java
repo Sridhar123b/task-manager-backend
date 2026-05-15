@@ -12,7 +12,7 @@ import com.taskmanager.backend.model.User;
 import com.taskmanager.backend.repository.UserRepository;
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     @Autowired
