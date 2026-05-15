@@ -45,7 +45,7 @@ public class Task {
         return assignedTo;
     }
 
-    public void setAssignedTo(String status) {
+    public void setAssignedTo(String assignedTo) {
         this.assignedTo = assignedTo;
     }
 }
