@@ -1,5 +1,8 @@
 package com.taskmanager.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,8 +17,13 @@ public class Task {
 
     private String title;
     private String status;
-    private String assignedTo;
+  @JsonProperty("assignedTo")
+private String assignedTo;
 
+@JsonProperty("dueDate")
+@Column(name = "due_date")
+private String dueDate;
+private String userEmail;
     public Task() {
     }
 
@@ -48,4 +56,18 @@ public class Task {
     public void setAssignedTo(String assignedTo) {
         this.assignedTo = assignedTo;
     }
+     public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+    public String getUserEmail() {
+    return userEmail;
+}
+
+public void setUserEmail(String userEmail) {
+    this.userEmail = userEmail;
+}
 }

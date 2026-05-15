@@ -44,9 +44,11 @@ public class TaskController {
                 .orElseThrow(() -> new RuntimeException("Task not found"));
 
         task.setTitle(updatedTask.getTitle());
-        task.setStatus(updatedTask.getStatus());
+task.setStatus(updatedTask.getStatus());
+task.setAssignedTo(updatedTask.getAssignedTo());
+task.setDueDate(updatedTask.getDueDate());
 
-        return taskRepository.save(task);
+return taskRepository.save(task);
     }
 
     @DeleteMapping("/{id}")
