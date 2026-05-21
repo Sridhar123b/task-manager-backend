@@ -33,7 +33,8 @@ public class AuthController {
     @Autowired
     private JavaMailSender mailSender;
 
-    // SIGNUP
+    // ================= SIGNUP =================
+
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody User user) {
 
@@ -41,7 +42,8 @@ public class AuthController {
         System.out.println(user.getEmail());
         System.out.println(user.getPassword());
 
-        User existingUser = userRepository.findByEmail(user.getEmail());
+        User existingUser =
+                userRepository.findByEmail(user.getEmail());
 
         if (existingUser != null) {
             return ResponseEntity
@@ -51,31 +53,43 @@ public class AuthController {
 
         // Encode password
         user.setPassword(
-                passwordEncoder.encode(user.getPassword()));
+                passwordEncoder.encode(
+                        user.getPassword()));
 
         // ADMIN EMAIL
-        if (user.getEmail().equals("bottasridhar159@gmail.com")) {
+        if (user.getEmail()
+                .equals("bottasridhar159@gmail.com")) {
+
             user.setRole(Role.ADMIN);
+
         } else {
+
             user.setRole(Role.MEMBER);
         }
 
-        return ResponseEntity.ok(userRepository.save(user));
+        return ResponseEntity.ok(
+                userRepository.save(user));
     }
 
-    // LOGIN
+    // ================= LOGIN =================
+
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User loginUser) {
+    public ResponseEntity<?> login(
+            @RequestBody User loginUser) {
 
-        User user = userRepository.findByEmail(loginUser.getEmail());
+        User user =
+                userRepository.findByEmail(
+                        loginUser.getEmail());
 
+        // Check email
         if (user == null) {
+
             return ResponseEntity
                     .badRequest()
                     .body("Email not found");
         }
 
-        // Password check
+        // Check password
         if (!passwordEncoder.matches(
                 loginUser.getPassword().trim(),
                 user.getPassword().trim())) {
@@ -86,10 +100,13 @@ public class AuthController {
         }
 
         // Generate JWT token
-        String token = JwtUtil.generateToken(user.getEmail());
+        String token =
+                JwtUtil.generateToken(
+                        user.getEmail());
 
         // Response object
-        Map<String, Object> response = new HashMap<>();
+        Map<String, Object> response =
+                new HashMap<>();
 
         response.put("token", token);
         response.put("email", user.getEmail());
@@ -98,15 +115,18 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
-    // FORGOT PASSWORD
+    // ================= FORGOT PASSWORD =================
+
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(
             @RequestBody User userRequest) {
 
-        User user = userRepository.findByEmail(
-                userRequest.getEmail());
+        User user =
+                userRepository.findByEmail(
+                        userRequest.getEmail());
 
         if (user == null) {
+
             return ResponseEntity
                     .badRequest()
                     .body("Email not found");
@@ -123,9 +143,11 @@ public class AuthController {
                 "Password updated successfully");
     }
 
-    // TEST API
+    // ================= TEST API =================
+
     @GetMapping("/test")
     public String test() {
-        return "Backend Working";
+
+        return "Backend working";
     }
 }
